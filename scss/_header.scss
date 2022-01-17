@@ -1,0 +1,158 @@
+// header
+
+.header{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    padding: 30px 0;
+    .container{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo{
+       display: flex;
+       color: inherit;
+       font-weight: 700;
+        img{
+            display: block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        span{
+            color: $primary;
+        }
+    }
+    .menu{
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        left: -100%;
+        top: -30px;
+        background: $sectionBg;
+        z-index: 3;
+        text-align: center;
+        font-size: 30px;
+        transition: left .3s;
+        .menu-item{
+            margin-top: 20vh;
+            @media (min-width:768px) {
+                margin-top: 0;
+                margin-left: 20px;
+            }
+        }
+
+        .menu-link{
+            color: $textColor;
+            @media (min-width:768px) {
+                font-size: 16px;
+                transition: color .3s;
+                &:hover{
+                    color: $primary;
+                }
+            }
+        }
+
+        @media (min-width:768px) {
+            position: static;
+            width: auto;
+            height: auto;
+        }
+
+        .menu-list{
+            @media (min-width:768px) {
+                display: flex;
+            }
+        }
+    }
+    .account{
+        position: absolute;
+        z-index: 6;
+        top: -320%;
+        background: $sectionBg;           
+        transition: .3s;
+        transition-delay: .3s;
+        @media (min-width:768px) {
+            position: static;
+        }
+    }
+
+    .login{
+        padding: 15px 30px;
+        color: $textColor;
+    }
+    .register{
+        background: $primary;
+        padding: 15px 30px;
+        color: #fff;
+        border-radius: 5px;
+    }
+}
+
+
+// menu
+
+#togle{
+    position: absolute;
+    right: 15px;
+    opacity: 0;
+    width: 24px;
+    height: 16px;
+    z-index: 5;
+    @media (min-width:768px) {
+        display: none;
+    }
+}
+#togle:checked ~ .menu{
+    left: 0;
+}
+
+#togle:checked ~ .account{
+    top: 10%;
+}
+
+#togle:checked ~ label{
+    .toggle-btn{
+        &::before{
+            top: 0;
+            transform: rotate(90deg);
+        }
+
+        &::after{
+            top: 0;
+        }
+        
+        transform: rotate(45deg);
+
+    }
+}
+label{ 
+    display: block;
+    width: 24px;
+    height: 16px;
+    position: relative;
+    z-index: 4;
+    @media (min-width:768px) {
+        display: none;
+    }
+    .toggle-btn{
+        @media (min-width:768px) {
+            display: none;
+        }
+        @include toggle-btn(calc(50% - 1px));
+        &::before{
+            content: '';
+            @include toggle-btn(-7px); 
+            transition: 0.3s;
+        }
+        &::after{
+            content: '';
+            @include toggle-btn(7px);   
+            transition: 0.3s; 
+        }
+        transition: 0.3s;
+    }
+}
+
